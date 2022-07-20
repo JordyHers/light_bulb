@@ -41,23 +41,23 @@ class _LightEffectState extends State<LightEffect> {
                   style: !isLightOn
                       ? const TextStyle(color: Colors.black)
                       : TextStyle(
-                    // color: Colors.white,
-                    foreground: Paint()
-                      ..strokeWidth = 9.0
-                      ..shader = ui.Gradient.radial(
-                        containerPosition == Offset.zero
-                            ? initialPosition
-                            : Offset(
-                          containerPosition.dx,
-                          containerPosition.dy + 60,
+                          // color: Colors.white,
+                          foreground: Paint()
+                            ..strokeWidth = 9.0
+                            ..shader = ui.Gradient.radial(
+                              containerPosition == Offset.zero
+                                  ? initialPosition
+                                  : Offset(
+                                      containerPosition.dx,
+                                      containerPosition.dy + 60,
+                                    ),
+                              190.0,
+                              <Color>[
+                                lightColor,
+                                Colors.grey.shade900,
+                              ],
+                            ),
                         ),
-                        190.0,
-                        <Color>[
-                          lightColor,
-                          Colors.grey.shade900,
-                        ],
-                      ),
-                  ),
                 ),
                 Wire(
                   toOffset: Offset(
@@ -77,25 +77,25 @@ class _LightEffectState extends State<LightEffect> {
                   child: !isLightOn
                       ? bulbContainer()
                       : Draggable(
-                    feedback: Material(
-                      child: bulbContainer(),
-                      color: Colors.transparent,
-                    ),
-                    onDragEnd: (x) {
-                      setState(() {
-                        containerPosition = initialPosition;
-                      });
-                    },
-                    onDragUpdate: (x) {
-                      if (isLightOn) {
-                        containerPosition = x.localPosition;
+                          feedback: Material(
+                            color: Colors.transparent,
+                            child: bulbContainer(),
+                          ),
+                          onDragEnd: (x) {
+                            setState(() {
+                              containerPosition = initialPosition;
+                            });
+                          },
+                          onDragUpdate: (x) {
+                            if (isLightOn) {
+                              containerPosition = x.localPosition;
 
-                        setState(() {});
-                      }
-                    },
-                    child: bulbContainer(),
-                    childWhenDragging: Container(),
-                  ),
+                              setState(() {});
+                            }
+                          },
+                          childWhenDragging: Container(),
+                          child: bulbContainer(),
+                        ),
                 ),
               ],
             ),
@@ -140,9 +140,9 @@ class _WireState extends State<Wire> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return CustomPaint(
         painter: LinePainter(
-          toOffset: widget.toOffset,
-          initialPosition: widget.initialPosition,
-        ));
+      toOffset: widget.toOffset,
+      initialPosition: widget.initialPosition,
+    ));
   }
 }
 
